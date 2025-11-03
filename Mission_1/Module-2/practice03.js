@@ -7,7 +7,6 @@ const users = [
 ];
 
 const lookupTable = users
-  .sort((a, b) => a.name.localeCompare(b.name))
   .reduce((table, user) => {
     table[user.id] = user;
     return table;
