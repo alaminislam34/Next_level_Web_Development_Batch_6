@@ -5,6 +5,7 @@ const products = [
     category: "Electronics",
     brand: "Apple",
     price: 1300,
+    quantity: 15,
   },
   {
     id: 2,
@@ -12,6 +13,7 @@ const products = [
     category: "Electronics",
     brand: "Samsung",
     price: 1100,
+    quantity: 12,
   },
   {
     id: 3,
@@ -19,6 +21,7 @@ const products = [
     category: "Electronics",
     brand: "Apple",
     price: 1800,
+    quantity: 8,
   },
   {
     id: 4,
@@ -26,6 +29,7 @@ const products = [
     category: "Fashion",
     brand: "Nike",
     price: 250,
+    quantity: 30,
   },
   {
     id: 5,
@@ -33,6 +37,7 @@ const products = [
     category: "Fashion",
     brand: "Adidas",
     price: 220,
+    quantity: 25,
   },
   {
     id: 6,
@@ -40,6 +45,7 @@ const products = [
     category: "Fashion",
     brand: "Levi’s",
     price: 120,
+    quantity: 40,
   },
   {
     id: 7,
@@ -47,14 +53,23 @@ const products = [
     category: "Home",
     brand: "Ikea",
     price: 600,
+    quantity: 10,
   },
-  { id: 8, name: "Office Chair", category: "Home", brand: "Ikea", price: 350 },
+  {
+    id: 8,
+    name: "Office Chair",
+    category: "Home",
+    brand: "Ikea",
+    price: 350,
+    quantity: 18,
+  },
   {
     id: 9,
     name: "Sony Headphones",
     category: "Electronics",
     brand: "Sony",
     price: 300,
+    quantity: 28,
   },
   {
     id: 10,
@@ -62,67 +77,24 @@ const products = [
     category: "Fashion",
     brand: "Puma",
     price: 80,
+    quantity: 3,
   },
 ];
 
-// // ? grouping data practice
+// ? grouping and aggregating practice
 
-// const categooryGrouping = products.reduce((group, product) => {
-//   if (!group[product.category]) {
-//     group[product.category] = [];
-//   }
-//   group[product.category].push(product);
+const CountByPriceQuantity = products.reduce((group, product) => {
+  const { category, price, quantity } = product;
 
-//   return group;
-// }, {});
-// // console.log(categooryGrouping);
-
-// const brandGrouping = products.reduce((group, product) => {
-//   if (!group[product.brand]) {
-//     group[product.brand] = [];
-//   }
-
-//   group[product.brand].push(product);
-
-//   return group;
-// }, {});
-
-// console.log(brandGrouping);
-
-// console.log(brandGrouping['Apple'])
-
-const strings = [
-  "A",
-  "B",
-  "C",
-  "D",
-  "A",
-  "B",
-  "C",
-  "D",
-  "A",
-  "B",
-  "C",
-  "D",
-  "A",
-  "B",
-  "C",
-  "D",
-  "C",
-  "D",
-  "C",
-  "D",
-];
-
-// ? GROUPING SAME STRING
-
-const group = strings.reduce((group, string) => {
-  if (!group[string]) {
-    group[string] = 0;
+  if (!group[category]) {
+    group[category] = {
+      totalRevenue: 0,
+      itemCount: 0,
+    };
   }
-  group[string] += 1;
+  (group[category].totalRevenue += price * quantity),
+    (group[category].itemCount += quantity);
 
   return group;
 }, {});
-
-console.log(group);
+console.log(CountByPriceQuantity);
