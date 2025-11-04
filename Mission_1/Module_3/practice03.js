@@ -6,7 +6,7 @@ class Stack {
     this.items.push(value);
   }
   pop() {
-    if (this.isEmpty) {
+    if (this.isEmpty()) {
       return undefined;
     }
     return this.items.pop();
