@@ -24,18 +24,23 @@ class LinkedList {
 
     this.lenght++;
   }
-  prepend() {
+  prepend(value) {
     const newNode = new Node(value);
     if (this.head === null) {
       this.head = newNode;
       this.tail = newNode;
     } else {
-      newNode.head
+     newNode.next = this.head;
+     this.head = newNode;
     }
 
     this.lenght++;
   }
-  insert() {}
+
+
+  insert(index, value) {
+    
+  }
   remove() {}
   print() {
     const arr = [];
@@ -48,9 +53,14 @@ class LinkedList {
     console.log(arr.join(" --> "), "--> null");
   }
 }
-const linkedList = new LinkedList()
+const linkedList = new LinkedList();
 
-linkedList.append(1)
-linkedList.append(2)
-linkedList.append(3)
-linkedList.print()
+linkedList.append(1);
+linkedList.append(2);
+linkedList.append(3);
+
+linkedList.prepend(10);
+linkedList.prepend(20);
+linkedList.prepend(30);
+
+linkedList.print();
