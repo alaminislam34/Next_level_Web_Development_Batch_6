@@ -23,12 +23,16 @@ const GetMutualFriends = (usersA, usersB) => {
   //       }
   //     });
   //   });
+  //   * O(n)
   const idListed = new Set(usersA.map((user) => user.id));
+  //   * O(n)
   usersA.forEach((userA) => {
+    //   * O(1)
     if (idListed.has(userA.id)) {
       mutualFriends.push(userA);
     }
   });
+  
   const end = performance.now();
   return { commonFriend: mutualFriends.length, takeTime: end - start };
 };
