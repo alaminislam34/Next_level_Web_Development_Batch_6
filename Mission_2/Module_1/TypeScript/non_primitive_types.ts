@@ -8,12 +8,18 @@ const obj: { name: string; email: string; phone: number } = {
 };
 
 // define type separately
-type User = { name: string; email: string; phone: number };
+type User = {
+  name: string;
+  email: string;
+  phone: number;
+  role?: string; // option type define
+};
 
 const obj2: User = {
   name: "alamin",
   email: "alamin@gmail.com",
   phone: 1234245245,
+  role: "admin", // if I do not declare this property typescript has no error show
 };
 
 // array type
@@ -37,3 +43,17 @@ type Add = (num1: number, num2: number) => number;
 const add2: Add = (num1, num2) => {
   return num1 * num2;
 };
+
+//  how to declare a function in the objects
+
+const user = {
+  name: "alamin",
+  email: "alamin@gmail.com",
+  balance: 0,
+  addBalance(num: number): number {
+    const newBalance = this.balance + num;
+    return newBalance;
+  },
+};
+
+user.addBalance(24024)
