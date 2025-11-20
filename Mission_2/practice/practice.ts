@@ -214,8 +214,6 @@ const products = [
 
 // console.log(findHighestPrice(products));
 
-
-
 /*
 Problem 7 — Merge and Remove Duplicate Objects by id
 
@@ -241,3 +239,55 @@ Output:
 
 */
 
+/*
+Problem 1 — E-Commerce Cart Summary
+
+Input:
+
+const cart = [
+  { name: "Laptop", price: 1000, quantity: 1, discount?: 10 },
+  { name: "Mouse", price: 50, quantity: 2 },
+  { name: "Keyboard", price: 80, quantity: 1, discount?: 20 }
+];
+
+
+Output:
+
+{
+  totalItems: 4,
+  totalPrice: 1114, // discount applied
+  productsWithDiscount: ["Laptop", "Keyboard"]
+}
+
+
+Complexity: optional discount, total items, filter products with discount.
+
+*/
+type Cart = {
+  name: string;
+  price: number;
+  quantity: number;
+  discount?: number;
+};
+const totalCount = (carts: Cart[]): string => {
+  let totalItems = 0;
+  let totalPrice = 0;
+  const productsWithDiscount: string[] = [];
+  for (let c of carts) {
+    totalItems = totalItems + c.quantity;
+    totalPrice =
+      totalPrice + (c.price - ((c.discount ?? 0) * c.price) / 100) * c.quantity;
+    if (c.discount) {
+      productsWithDiscount[productsWithDiscount.length] = c.name;
+    }
+  }
+
+  return `totalItems: ${totalItems}, totalPrice: ${totalPrice}, productsWithDiscount:${productsWithDiscount}`;
+};
+const cart = [
+  { name: "Laptop", price: 1000, quantity: 1, discount: 10 },
+  { name: "Mouse", price: 50, quantity: 2 },
+  { name: "Keyboard", price: 80, quantity: 1, discount: 20 },
+];
+
+console.log(totalCount(cart));
