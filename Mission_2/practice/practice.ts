@@ -175,4 +175,69 @@ const users = [
 ];
 // console.log(removeInActiveUser(users));
 
+/*
+Problem 6 — Find Product With Highest Price
+
+Input:
+
+[
+  { name: "Pen", price: 10 },
+  { name: "Watch", price: 100 },
+  { name: "Bag", price: 50 }
+]
+
+
+Output:
+
+{ name: "Watch", price: 100 }
+*/
+
+type Product = {
+  name: string;
+  price: number;
+};
+const findHighestPrice = (products: Product[]) => {
+  let Highest = products[0];
+  for (let p of products) {
+    if (p.price > Highest.price) {
+      Highest = p;
+    }
+  }
+  return Highest;
+};
+
+const products = [
+  { name: "Pen", price: 10 },
+  { name: "Watch", price: 100 },
+  { name: "Bag", price: 50 },
+];
+
+// console.log(findHighestPrice(products));
+
+
+
+/*
+Problem 7 — Merge and Remove Duplicate Objects by id
+
+Input:
+
+[
+  { id: 1, name: "A" },
+  { id: 2, name: "B" }
+],
+[
+  { id: 2, name: "B" },
+  { id: 3, name: "C" }
+]
+
+
+Output:
+
+[
+  { id: 1, name: "A" },
+  { id: 2, name: "B" },
+  { id: 3, name: "C" }
+]
+
+*/
 
