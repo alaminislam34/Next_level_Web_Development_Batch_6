@@ -99,26 +99,26 @@ const testFiles = [
   "random.xyz",
 ];
 
-// Create test files in the source directory
-function initializeTestFiles() {
+//  initial file create
+function initializeFiles() {
   if (!fs.existsSync(sourceDir)) {
     fs.mkdirSync(sourceDir, { recursive: true });
     testFiles.forEach((file) => {
-      fs.writeFileSync(path.join(sourceDir, file), `Content of ${file}`);
+      fs.writeFileSync(path.join(sourceDir, file), `content of ${file}`);
     });
   }
-  console.log("Messy file created!!!!!!!!!!");
-
   if (!fs.existsSync(organizedDir)) {
     fs.mkdirSync(organizedDir, { recursive: true });
-    Object.keys(categories).forEach((category) => {
-      const categoryPath = path.join(organizedDir, category);
+    Object.keys(categories).forEach((file) => {
+      const categoryPath = path.join(organizedDir, file);
       fs.mkdirSync(categoryPath, { recursive: true });
     });
   }
+
+  console.log("Messy file created!!!");
 }
 
-function getCategoriesFiles(filename) {
+function getCategories(filename) {
   const ext = path.extname(filename).toLowerCase();
   for (const [category, extensions] of Object.entries(categories)) {
     if (extensions.includes(ext)) {
@@ -129,17 +129,18 @@ function getCategoriesFiles(filename) {
 }
 
 function organizedFiles() {
-  console.log("File organizer: \n");
+  console.log("Organize file:");
   console.log("Source file: ", sourceDir);
-  console.log("Organized File:", organizedDir);
-  console.log("\n", "-".repeat(50), "\n");
+  console.log("Organize file: ", organizedDir);
+  console.log("\n", "- -".repeat(50), "\n");
 
   const files = fs.readdirSync(sourceDir);
   if (files.length === 0) {
-    console.log("No files to work on!!!");
+    console.log("No files to work on!!!!!");
     return;
   }
-  console.log(`Found ${files.length} files to organized \n`);
+
+  console.log(`Found ${files.length} files to organize`);
 
   const stats = {
     total: 0,
@@ -150,20 +151,17 @@ function organizedFiles() {
     const sourcePath = path.join(sourceDir, file);
     const stat = fs.statSync(sourcePath);
 
-    // check jodi ata folder hoy tahole return korbo
     if (stat.isDirectory()) {
       return;
     }
 
-    const category = getCategoriesFiles(file);
+    const category = getCategories(file);
     const destDir = path.join(organizedDir, category);
     const destPath = path.join(destDir, file);
 
     fs.copyFileSync(sourcePath, destPath);
-
     stats.total++;
     stats.byCategory[category] = (stats.byCategory[category] || 0) + 1;
-
     console.log(file);
     console.log(category);
     console.log(stat.size);
@@ -172,20 +170,21 @@ function organizedFiles() {
 
 function showHelp() {
   console.log(`
-    commands
-    init - create files
-    organize - organizer files into categories
+        commands
+        init - created file 
+        organize - file organize 
 
-    example: 
-    node file-organizer init 
-    node file-organizer organize
-    `);
+        example: 
+        node fileOrganizer.js init
+        node fileOrganizer.js organize
+        `);
 }
-const command = process.argv[2]
+
+const command = process.argv[2];
 
 switch (command) {
   case "init":
-    initializeTestFiles();
+    initializeFiles();
     break;
   case "organize":
     organizedFiles();
