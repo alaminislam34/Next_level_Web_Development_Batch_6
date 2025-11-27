@@ -1,0 +1,293 @@
+// class Animal {
+//   constructor(
+//     public name: string,
+//     public species: string,
+//     public sound: string
+//   ) {}
+//   makeSound() {
+//     console.log(`The ${this.name} make sound ${this.sound}`);
+//   }
+// }
+
+// const cat = new Animal("Cat", "cat", "mew mew");
+// console.log(cat.name);
+
+// Problem 1 — Find Users Above Age 25
+
+type User1 = {
+  name: string;
+  age: number;
+};
+
+const getUserAbove25 = (users: User1[]) => {
+  const above25age: User1[] = [];
+  // users.forEach((user) => console.log(user));
+  for (let u of users) {
+    if (u.age > 25) {
+      above25age[above25age.length] = u;
+    }
+  }
+  return above25age;
+};
+const user = [
+  { name: "Rakib", age: 22 },
+  { name: "Asha", age: 27 },
+  { name: "Rumi", age: 30 },
+];
+
+// console.log(getUserAbove25(user));
+
+// Problem 2 — Convert Product Names to Slugs
+
+// input
+const arr = ["Red Shirt", "Blue Jeans", "Smart Watch"];
+
+const convertSlugs = (arr: string[]): string[] => {
+  const slugArr: string[] = [];
+  for (let str of arr) {
+    const slugs = str.split(" ").join("-").toLocaleString().toLowerCase();
+    slugArr[slugArr.length] = slugs;
+  }
+  return slugArr;
+};
+// console.log(convertSlugs(arr));
+
+// output
+// ["red-shirt", "blue-jeans", "smart-watch"]
+
+// Problem 3 — Sort Objects By Score (Descending)
+// Input:
+
+const players = [
+  { player: "A", score: 10 },
+  { player: "B", score: 45 },
+  { player: "C", score: 30 },
+];
+
+// Output:
+
+// [
+//   { player: "B", score: 45 },
+//   { player: "C", score: 30 },
+//   { player: "A", score: 10 }
+// ]
+type Player = {
+  player: string;
+  score: number;
+};
+
+const sortByScore = (arr: Player[]) => {
+  const sortArr: Player[] = [];
+  for (let player of arr) {
+    let inserted = false;
+    for (let i = 0; i < sortArr.length; i++) {
+      if (player.score > sortArr[i].score) {
+        sortArr.splice(i, 0, player);
+        inserted = true;
+        break;
+      }
+    }
+    if (!inserted) {
+      sortArr[sortArr.length] = player;
+    }
+  }
+  return sortArr;
+};
+
+// console.log(sortByScore(players));
+
+/*
+
+Problem 4 — Find Total Salary
+
+Input:
+
+[
+  { name: "Rahim", salary: 20000 },
+  { name: "Karim", salary: 30000 },
+  { name: "Salma", salary: 25000 }
+]
+
+
+Output:
+
+75000
+*/
+type Employee = {
+  name: string;
+  salary: number;
+};
+
+const findTotalSalary = (arr: Employee[]): number => {
+  let totalSalary = 0;
+  for (let em of arr) {
+    totalSalary = totalSalary + em.salary;
+  }
+  return totalSalary;
+};
+
+const empolyee = [
+  { name: "Rahim", salary: 20000 },
+  { name: "Karim", salary: 30000 },
+  { name: "Salma", salary: 25000 },
+];
+
+// console.log(findTotalSalary(empolyee));
+
+/*
+Problem 5 — Remove "isActive: false" Users
+
+Input:
+
+[
+  { name: "A", isActive: true },
+  { name: "B", isActive: false },
+  { name: "C", isActive: true }
+]
+
+
+Output:
+
+[
+  { name: "A", isActive: true },
+  { name: "C", isActive: true }
+]
+*/
+
+type U = {
+  name: string;
+  isActive: boolean;
+};
+
+const removeInActiveUser = (users: U[]): U[] => {
+  const activeUsers: U[] = [];
+  for (let user of users) {
+    if (user.isActive) {
+      activeUsers[activeUsers.length] = user;
+    }
+  }
+  return activeUsers;
+};
+const users = [
+  { name: "A", isActive: true },
+  { name: "B", isActive: false },
+  { name: "C", isActive: true },
+];
+// console.log(removeInActiveUser(users));
+
+/*
+Problem 6 — Find Product With Highest Price
+
+Input:
+
+[
+  { name: "Pen", price: 10 },
+  { name: "Watch", price: 100 },
+  { name: "Bag", price: 50 }
+]
+
+
+Output:
+
+{ name: "Watch", price: 100 }
+*/
+
+type Product = {
+  name: string;
+  price: number;
+};
+const findHighestPrice = (products: Product[]) => {
+  let Highest = products[0];
+  for (let p of products) {
+    if (p.price > Highest.price) {
+      Highest = p;
+    }
+  }
+  return Highest;
+};
+
+const products = [
+  { name: "Pen", price: 10 },
+  { name: "Watch", price: 100 },
+  { name: "Bag", price: 50 },
+];
+
+// console.log(findHighestPrice(products));
+
+/*
+Problem 7 — Merge and Remove Duplicate Objects by id
+
+Input:
+
+[
+  { id: 1, name: "A" },
+  { id: 2, name: "B" }
+],
+[
+  { id: 2, name: "B" },
+  { id: 3, name: "C" }
+]
+
+
+Output:
+
+[
+  { id: 1, name: "A" },
+  { id: 2, name: "B" },
+  { id: 3, name: "C" }
+]
+
+*/
+
+/*
+Problem 1 — E-Commerce Cart Summary
+
+Input:
+
+const cart = [
+  { name: "Laptop", price: 1000, quantity: 1, discount?: 10 },
+  { name: "Mouse", price: 50, quantity: 2 },
+  { name: "Keyboard", price: 80, quantity: 1, discount?: 20 }
+];
+
+
+Output:
+
+{
+  totalItems: 4,
+  totalPrice: 1114, // discount applied
+  productsWithDiscount: ["Laptop", "Keyboard"]
+}
+
+
+Complexity: optional discount, total items, filter products with discount.
+
+*/
+type Cart = {
+  name: string;
+  price: number;
+  quantity: number;
+  discount?: number;
+};
+const totalCount = (carts: Cart[]): string => {
+  let totalItems = 0;
+  let totalPrice = 0;
+  const productsWithDiscount: string[] = [];
+  for (let c of carts) {
+    totalItems = totalItems + c.quantity;
+    totalPrice =
+      totalPrice + (c.price - ((c.discount ?? 0) * c.price) / 100) * c.quantity;
+    if (c.discount) {
+      productsWithDiscount[productsWithDiscount.length] = c.name;
+    }
+  }
+
+  return `totalItems: ${totalItems}, totalPrice: ${totalPrice}, productsWithDiscount:${productsWithDiscount}`;
+};
+const cart = [
+  { name: "Laptop", price: 1000, quantity: 1, discount: 10 },
+  { name: "Mouse", price: 50, quantity: 2 },
+  { name: "Keyboard", price: 80, quantity: 1, discount: 20 },
+];
+
+console.log(totalCount(cart));
