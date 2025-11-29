@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1764272497564,
+    "name": "Al amin",
+    "email": "alamin@example.com",
+    "phone": "+88013-555-0147",
+    "role": "Developer",
+    "address": {
+      "street": "Mirpur",
+      "city": "Dhaka",
+      "country": "Bangladesh"
+    }
+  },
+  {
+    "id": 1764272514568,
+    "name": "Al amin Islam",
+    "email": "alamin@example.com",
+    "phone": "+88013-555-0147",
+    "role": "Developer",
+    "address": {
+      "street": "Mirpur",
+      "city": "Dhaka",
+      "country": "Bangladesh"
+    }
+  }
+]
