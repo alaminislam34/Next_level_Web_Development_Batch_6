@@ -50,12 +50,88 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Hello Next level Developer!");
 });
 
-app.post("/", (req: Request, res: Response) => {
-  console.log(req.body);
-  res.status(201).json({
-    success: true,
-    message: "Post created",
-  });
+app.post("/user", async (req: Request, res: Response) => {
+  const { name, email } = req.body;
+
+  try {
+    const result = await pool.query(
+      `INSERT INTO users(name, email) VALUES($1, $2) RETURNING *`,
+      [name, email]
+    );
+    res.status(201).json({
+      success: true,
+      message: "User inserted successfully",
+      data: result.rows[0],
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+// get single user
+app.get("/users", async (req: Request, res: Response) => {
+  try {
+    const result = await pool.query(`SELECT * FROM users`);
+    res.status(200).json({
+      success: true,
+      message: "User get successfully",
+      data: result.rows,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+// get single user
+app.get("/users/:id", async (req: Request, res: Response) => {
+  try {
+    const result = await pool.query(`SELECT * FROM users WHERE id = $1`, [
+      req.params.id,
+    ]);
+    if (result.rows.length === 0) {
+      res.status(400).json({
+        success: false,
+        message: "User not found",
+      });
+    } else {
+      res.status(200).json({
+        success: true,
+        message: "User get successfully",
+        data: result.rows[0],
+      });
+    }
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+app.post("/todo", async (req, res) => {
+  const { title, descripton } = req.body;
+  try {
+    const result = await pool.query(
+      `INSERT INTO todos(user_id, title, description) VALUES($1,$2, $2) RETURNING *`,
+      [, title, descripton]
+    );
+    res.status(201).json({
+      success: true,
+      message: "todo created successfully",
+      data: result.rows[0],
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: true,
+      message: error.message,
+    });
+  }
 });
 
 app.listen(port, () => {
