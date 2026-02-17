@@ -7,11 +7,12 @@
     "start": "node dist/server.js",
     "build": "tsc",
     "dev": "tsx watch src/server.ts",
-    "migrate": "prisma migrate dev",
-    "studio": "prisma studio",
+    "lint": "eslint src --ext .ts",
     "generate": "prisma generate",
-    "pull": "prisma db pull",
+    "migrate": "prisma migrate dev",
     "push": "prisma db push",
+    "pull": "prisma db pull",
+    "studio": "prisma studio",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -20,21 +21,21 @@
   "type": "module",
   "packageManager": "pnpm@10.28.0",
   "dependencies": {
-    "@prisma/adapter-pg": "^7.3.0",
-    "@prisma/client": "^7.3.0",
-    "dotenv": "^17.2.4",
+    "@eslint/js": "^10.0.1",
+    "@prisma/adapter-pg": "^7.4.0",
+    "@prisma/client": "^7.4.0",
+    "@types/express": "^5.0.6",
+    "dotenv": "^17.3.1",
+    "eslint": "^10.0.0",
     "express": "^5.2.1",
-    "pg": "^8.18.0"
+    "pg": "^8.18.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.56.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.2",
-    "@types/express": "^5.0.6",
-    "@types/node": "^25.2.1",
+    "@types/node": "^25.2.3",
     "@types/pg": "^8.16.0",
-    "eslint": "^9.39.2",
-    "prisma": "^7.3.0",
-    "tsx": "^4.21.0",
-    "typescript": "^5.9.3",
-    "typescript-eslint": "^8.54.0"
+    "prisma": "^7.4.0",
+    "tsx": "^4.21.0"
   }
 }

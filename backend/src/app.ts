@@ -1,4 +1,5 @@
 import express, { Application, Request, Response } from "express";
+import { IndexRoutes } from "./app/routes";
 
 const app: Application = express();
 
@@ -8,9 +9,10 @@ app.use(express.urlencoded({ extended: true }));
 // Middleware to parse JSON bodies
 app.use(express.json());
 
-// Basic route
+app.use("/api/v1", IndexRoutes);
+
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello, TypeScript + Express!");
+  res.send("Welcome to the HeadCare API!");
 });
 
 export default app;

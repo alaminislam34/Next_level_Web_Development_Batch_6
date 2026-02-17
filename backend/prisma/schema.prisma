@@ -13,19 +13,16 @@ datasource db {
   provider = "postgresql"
 }
 
-model speciality {
-  id          String  @id @default(uuid())
-  title       String  @unique @db.VarChar(100)
-  description String? @db.Text
-  icon        String? @db.VarChar(255)
+model Specialty {
+  id          String    @id @default(uuid(7))
+  title       String    @unique @db.VarChar(255)
+  description String    @db.Text
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  isDeleted   Boolean   @default(false)
+  deletedAt   DateTime?
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  isDeleted Boolean   @default(false)
-  deletedAt DateTime?
-
-  @@index([deletedAt], name: "idx_speciality_deletedAt")
-  @@index([title], name: "idx_speciality_title")
-  @@map("specialities")
+  @@index([title], name: "idx_specialty_title")
+  @@index([isDeleted], name: "idx_specialty_is_deleted")
+  @@map("specialties")
 }
